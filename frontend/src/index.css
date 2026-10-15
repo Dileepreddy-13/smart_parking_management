@@ -1,0 +1,84 @@
+@import 'tailwindcss';
+
+/*
+ * Visual language: road signage. Deep asphalt ink, parking-sign blue, lane-marking yellow.
+ * Slot states use the traffic-light convention so they read at a glance.
+ */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --color-ink-950: #070b14;
+  --color-ink-900: #0c1322;
+  --color-ink-800: #141d31;
+  --color-ink-700: #1f2a44;
+
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe7ff;
+  --color-brand-200: #bcd2ff;
+  --color-brand-500: #2f6bff;
+  --color-brand-600: #1d4ed8;
+  --color-brand-700: #1a3fae;
+
+  --color-lane-300: #ffe066;
+  --color-lane-400: #ffd21f;
+  --color-lane-500: #f5bd00;
+
+  --shadow-card: 0 1px 2px rgb(12 19 34 / 0.05), 0 4px 16px -6px rgb(12 19 34 / 0.08);
+  --animate-rise: rise 0.35s ease-out both;
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body { @apply bg-slate-50 text-slate-800 font-sans; }
+  h1, h2, h3 { @apply font-display tracking-tight text-ink-900; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-brand-500; }
+  button, [role='button'], a, select, summary { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+}
+
+@layer components {
+  .field-label { @apply mb-1.5 block text-sm font-medium text-slate-700; }
+  .field {
+    @apply block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-xs
+      placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none
+      disabled:bg-slate-100 disabled:text-slate-500;
+  }
+  .field-error { @apply mt-1 text-xs font-medium text-red-600; }
+  .table-wrap { @apply overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-card; }
+  .table { @apply w-full min-w-[640px] text-left text-sm; }
+  .table th { @apply border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold tracking-wide whitespace-nowrap text-slate-500 uppercase; }
+  .table td { @apply border-b border-slate-100 px-4 py-3 align-middle; }
+  .table tr:last-child td { @apply border-b-0; }
+  /* Painted lane markings used on the landing hero and auth panel */
+  .lane-stripes {
+    background-image: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.07) 0 2px, transparent 2px 72px);
+  }
+  .hatch {
+    background-image: repeating-linear-gradient(135deg, rgb(100 116 139 / 0.22) 0 4px, transparent 4px 9px);
+  }
+}
+
+.leaflet-container { font-family: var(--font-sans); border-radius: 0.75rem; z-index: 0; }
+.leaflet-popup-content-wrapper { border-radius: 0.75rem; }
+.leaflet-popup-content { margin: 14px 16px; }
+.map-pin {
+  display: grid; place-items: center; min-width: 34px; height: 34px; padding: 0 8px;
+  border-radius: 9999px 9999px 9999px 4px; border: 2px solid #fff; color: #fff;
+  font: 700 13px var(--font-mono); box-shadow: 0 4px 10px rgb(12 19 34 / 0.35);
+}
+.map-pin--free { background: #15803d; }
+.map-pin--full { background: #b91c1c; }
+.map-pin--closed { background: #64748b; }
+.map-pin--active { outline: 3px solid #ffd21f; }
+.map-me { width: 16px; height: 16px; border-radius: 9999px; background: #2f6bff; border: 3px solid #fff; box-shadow: 0 0 0 6px rgb(47 107 255 / 0.25); }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
+}

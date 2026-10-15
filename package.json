@@ -1,0 +1,16 @@
+{
+  "name": "smart-parking-management-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smart Parking Management System - Software Engineering case study (React + Express + PostgreSQL)",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "db:setup": "npm run db:setup --prefix backend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "test": "npm test --prefix backend && npm test --prefix frontend",
+    "test:e2e": "npm run test:e2e --prefix frontend",
+    "typecheck": "npm run typecheck --prefix backend && npm run typecheck --prefix frontend",
+    "lint": "npm run lint --prefix backend && npm run lint --prefix frontend"
+  }
+}
